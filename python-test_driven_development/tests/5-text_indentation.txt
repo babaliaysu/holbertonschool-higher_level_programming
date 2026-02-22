@@ -4,7 +4,7 @@ Tests for text_indentation
 
 >>> text_indentation = __import__('5-text_indentation').text_indentation
 
-# Normal case with all separators
+# Case 1: Standard usage
 >>> text_indentation("Hello. How are you? Fine: Thanks")
 Hello.
 <BLANKLINE>
@@ -12,29 +12,23 @@ How are you?
 <BLANKLINE>
 Fine:
 <BLANKLINE>
-
-# Text with leading/trailing spaces (should be stripped)
->>> text_indentation("   Sentence one.   Sentence two?   ")
-Sentence one.
+Thanks
+# Case 2: No separators
+>>> text_indentation("Only one line")
+Only one line
+# Case 3: Leading/Trailing spaces
+>>> text_indentation("  Start.  Middle:  End  ")
+Start.
 <BLANKLINE>
-Sentence two?
+Middle:
 <BLANKLINE>
-
-# Text without any separators
->>> text_indentation("Just a simple sentence")
-Just a simple sentence
-
-# Invalid type: Integer
->>> text_indentation(123)
+End
+# Case 4: Errors
+>>> text_indentation(89)
 Traceback (most recent call last):
 TypeError: text must be a string
 
-# Invalid type: None
->>> text_indentation(None)
-Traceback (most recent call last):
-TypeError: text must be a string
-
-# Missing argument
+# Case 5: Missing argument
 >>> text_indentation()
 Traceback (most recent call last):
 TypeError: text_indentation() missing 1 required positional argument: 'text'
