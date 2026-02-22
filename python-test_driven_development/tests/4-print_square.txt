@@ -1,0 +1,38 @@
+===========================
+Tests for print_square
+===========================
+
+>>> ps = __import__('4-print_square').print_square
+
+# Square of 3
+>>> ps(3)
+###
+###
+###
+
+# Size 1
+>>> ps(1)
+#
+
+# Size 0
+>>> ps(0)
+
+# Invalid size: Negative
+>>> ps(-4)
+Traceback (most recent call last):
+ValueError: size must be >= 0
+
+# Invalid type: String
+>>> ps("hi")
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+# Invalid type: Float
+>>> ps(2.5)
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+# Invalid type: Negative Float
+>>> ps(-1.1)
+Traceback (most recent call last):
+TypeError: size must be an integer
