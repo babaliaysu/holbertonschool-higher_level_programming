@@ -9,9 +9,9 @@ Correct output - case: "Bob" / "Lenon"
     >>> say_my_name("Bob", "Lenon")
     My name is Bob Lenon
 
-Correct output - case: "Bob" (only one argument)
+Correct output - case: "Bob"
     >>> say_my_name("Bob")
-    My name is Bob 
+    My name is Bob
 
 Correct output - case: "Bob" / 12 (last_name is not a string)
     >>> say_my_name("Bob", 12)
@@ -41,4 +41,4 @@ Test present: first_name is empty string
 
 Test present: both are empty strings
     >>> say_my_name("", "")
-    My name is
+    My name is  
