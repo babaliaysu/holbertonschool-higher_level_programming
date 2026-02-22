@@ -6,20 +6,20 @@ the final "My name is <first name> <last name>" message.
 """
 
 
-def say_my_name(ad, soyad=""):
+def say_my_name(first_name, last_name=""):
     """Prints a name in the format: My name is <first_name> <last_name>.
 
     Args:
-        ad (str): The first name.
-        soyad (str): The last name, defaults to an empty string.
+        first_name (str): The first name.
+        last_name (str): The last name, defaults to an empty string.
 
     Raises:
-        TypeError: If ad or soyad are not strings.
+        TypeError: If first_name or last_name are not strings.
     """
-    if not isinstance(ad, str):
+    if not isinstance(first_name, str):
         raise TypeError("first_name must be a string")
 
-    if not isinstance(soyad, str):
+    if not isinstance(last_name, str):
         raise TypeError("last_name must be a string")
 
-    print("My name is {} {}".format(ad, soyad))
+    print("My name is {} {}".format(first_name, last_name))
