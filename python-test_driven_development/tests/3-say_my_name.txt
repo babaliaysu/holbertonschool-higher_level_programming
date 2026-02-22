@@ -29,7 +29,7 @@ Test present: missing two arguments (should raise an error)
     >>> say_my_name()
     Traceback (most recent call last):
         ...
-    TypeError: say_my_name() missing 1 required positional argument: 'ad'
+    TypeError: say_my_name() missing 1 required positional argument: 'first_name'
 
 Test present: both are strings
     >>> say_my_name("John", "Smith")
