@@ -1,20 +1,20 @@
 #!/usr/bin/python3
-"""This module contains the function say_my_name.
+"""This module provides a function to print a formatted name.
 
-The module provides a way to print a formatted string containing
-a first name and a last name, while validating the input types.
+The module validates if the inputs are strings before printing
+the final "My name is <first name> <last name>" message.
 """
 
 
 def say_my_name(ad, soyad=""):
-    """Prints a string with the provided first and last name.
+    """Prints a name in the format: My name is <first_name> <last_name>.
 
     Args:
-        ad (str): The first name to be printed.
-        soyad (str): The last name to be printed. Defaults to "".
+        ad (str): The first name.
+        soyad (str): The last name, defaults to an empty string.
 
     Raises:
-        TypeError: If either ad or soyad is not a string.
+        TypeError: If ad or soyad are not strings.
     """
     if not isinstance(ad, str):
         raise TypeError("first_name must be a string")
