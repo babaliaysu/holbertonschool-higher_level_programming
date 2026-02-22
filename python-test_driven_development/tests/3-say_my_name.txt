@@ -1,0 +1,39 @@
+====================================
+The 3-say_my_name Module Test Suite
+====================================
+
+This test file ensures that the say_my_name function works correctly
+with various inputs, including edge cases and error handling.
+
+First, we import the function from our module:
+    >>> say_my_name = __import__('3-say_my_name').say_my_name
+
+Testing a standard case with both first and last names:
+    >>> say_my_name("John", "Smith")
+    My name is John Smith
+
+Testing the function with only a first name:
+    >>> say_my_name("Walter")
+    My name is Walter 
+
+Testing the function with empty strings:
+    >>> say_my_name("", "")
+    My name is  
+
+Testing error handling for the first name (should raise TypeError):
+    >>> say_my_name(123, "White")
+    Traceback (most recent call last):
+        ...
+    TypeError: first_name must be a string
+
+Testing error handling for the last name (should raise TypeError):
+    >>> say_my_name("John", [1, 2, 3])
+    Traceback (most recent call last):
+        ...
+    TypeError: last_name must be a string
+
+Testing with floats for the first name:
+    >>> say_my_name(3.14, "Pi")
+    Traceback (most recent call last):
+        ...
+    TypeError: first_name must be a string
