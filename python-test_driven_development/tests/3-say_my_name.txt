@@ -7,7 +7,7 @@ First, import the function:
 
 Correct output - case: "Bob" / "Lenon"
     >>> say_my_name("Bob", "Lenon")
-    My name is Bob Lenon
+    My name is BobLenon
 
 Correct output - case: "Bob"
     >>> say_my_name("Bob")
