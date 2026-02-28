@@ -1,22 +1,23 @@
 #!/usr/bin/python3
-"""Rectangle klası üçün modul"""
+"""Module that defines a Rectangle class"""
+
 
 class Rectangle:
-    """Düzbucaqlını təmsil edən klas"""
+    """Class that defines a rectangle"""
 
     def __init__(self, width=0, height=0):
-        """Yeni bir düzbucaqlı yaradır"""
+        """Initializes the rectangle"""
         self.width = width
         self.height = height
 
     @property
     def width(self):
-        """Eni geri qaytarır (Getter)"""
+        """Gets the width"""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """Eni təyin edir (Setter)"""
+        """Sets the width with validation"""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
@@ -25,12 +26,12 @@ class Rectangle:
 
     @property
     def height(self):
-        """Hündürlüyü geri qaytarır (Getter)"""
+        """Gets the height"""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """Hündürlüyü təyin edir (Setter)"""
+        """Sets the height with validation"""
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
@@ -38,21 +39,17 @@ class Rectangle:
         self.__height = value
 
     def area(self):
-        """Sahəni hesablayır"""
+        """Returns the rectangle area"""
         return self.__width * self.__height
 
     def perimeter(self):
-        """Perimetri hesablayır"""
+        """Returns the rectangle perimeter"""
         if self.__width == 0 or self.__height == 0:
             return 0
         return 2 * (self.__width + self.__height)
 
     def __str__(self):
-        """Düzbucaqlını # simvolu ilə string formatında qaytarır"""
+        """Returns a string representation of the rectangle with #"""
         if self.__width == 0 or self.__height == 0:
             return ""
-
-        # Hər sətri '#' simvollarından ibarət olan siyahı yaradırıq
-        rect_lines = [("#" * self.__width) for _ in range(self.__height)]
-        # Sətirləri yeni sətir (\n) ilə birləşdiririk
-        return "\n".join(rect_lines)
+        return (("#" * self.__width + "\n") * self.__height).strip()
