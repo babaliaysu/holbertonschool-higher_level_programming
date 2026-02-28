@@ -51,7 +51,7 @@ class Rectangle:
         """Düzbucaqlını # simvolu ilə string formatında qaytarır"""
         if self.__width == 0 or self.__height == 0:
             return ""
-        
+
         # Hər sətri '#' simvollarından ibarət olan siyahı yaradırıq
         rect_lines = [("#" * self.__width) for _ in range(self.__height)]
         # Sətirləri yeni sətir (\n) ilə birləşdiririk
