@@ -33,3 +33,21 @@ Test with already sorted list:
     >>> sorted_list = MyList([1, 2, 3])
     >>> sorted_list.print_sorted()
     [1, 2, 3]
+
+Test with unsorted negative numbers (Required check):
+    >>> mixed_list = MyList()
+    >>> mixed_list.append(10)
+    >>> mixed_list.append(-5)
+    >>> mixed_list.append(0)
+    >>> mixed_list.append(1)
+    >>> mixed_list.append(-100)
+    >>> mixed_list.append(5)
+    >>> mixed_list.print_sorted()
+    [-100, -5, 0, 1, 5, 10]
+    >>> print(mixed_list)
+    [10, -5, 0, 1, -100, 5]
+
+Test with only negative numbers:
+    >>> only_neg = MyList([-1, -20, -5])
+    >>> only_neg.print_sorted()
+    [-20, -5, -1]
