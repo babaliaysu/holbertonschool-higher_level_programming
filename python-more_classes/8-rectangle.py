@@ -3,7 +3,7 @@
 
 
 class Rectangle:
-    """Represents a rectangle with instance counting and custom symbols."""
+    """Represents a rectangle."""
 
     number_of_instances = 0
     print_symbol = "#"
@@ -16,12 +16,12 @@ class Rectangle:
 
     @property
     def width(self):
-        """Get the width of the rectangle."""
+        """Get the width."""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """Set the width of the rectangle."""
+        """Set the width."""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
@@ -30,12 +30,12 @@ class Rectangle:
 
     @property
     def height(self):
-        """Get the height of the rectangle."""
+        """Get the height."""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """Set the height of the rectangle."""
+        """Set the height."""
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
@@ -43,11 +43,11 @@ class Rectangle:
         self.__height = value
 
     def area(self):
-        """Returns the rectangle area."""
+        """Returns the area."""
         return self.__width * self.__height
 
     def perimeter(self):
-        """Returns the rectangle perimeter."""
+        """Returns the perimeter."""
         if self.__width == 0 or self.__height == 0:
             return 0
         return 2 * (self.__width + self.__height)
@@ -64,7 +64,7 @@ class Rectangle:
         return rect_2
 
     def __str__(self):
-        """Returns a string representation of the rectangle using print_symbol."""
+        """Returns the rectangle with print_symbol."""
         if self.__width == 0 or self.__height == 0:
             return ""
         rect_str = []
@@ -73,10 +73,10 @@ class Rectangle:
         return "\n".join(rect_str)
 
     def __repr__(self):
-        """Returns a string representation to recreate the instance."""
+        """Returns string representation for eval()."""
         return "Rectangle({}, {})".format(self.__width, self.__height)
 
     def __del__(self):
-        """Prints a message when an instance is deleted and decrements count."""
+        """Prints a message when deleted."""
         type(self).number_of_instances -= 1
         print("Bye rectangle...")
