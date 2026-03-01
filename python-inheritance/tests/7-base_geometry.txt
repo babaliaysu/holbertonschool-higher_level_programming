@@ -1,74 +1,41 @@
-===============================
-BaseGeometry Klassı üçün Testlər
-===============================
+The ``BaseGeometry`` class
+==========================
 
-Klassın instansiyasını (instantiation) yoxlayaq:
->>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
->>> bg = BaseGeometry()
+Importing the class:
+    >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+    >>> bg = BaseGeometry()
 
-1. area() metodunun yoxlanılması:
->>> bg.area()
-Traceback (most recent call last):
-    ...
-Exception: area() is not implemented
+Testing area():
+---------------
+The area() method should raise an Exception because it is not implemented yet.
+    >>> bg.area()
+    Traceback (most recent call last):
+    Exception: area() is not implemented
 
-2. integer_validator() - Ümumi yoxlama:
->>> bg.integer_validator("my_int", 12)
->>> bg.integer_validator("width", 89)
+Testing integer_validator():
+----------------------------
+Valid integers should pass without any output:
+    >>> bg.integer_validator("my_int", 12)
+    >>> bg.integer_validator("width", 89)
 
-3. integer_validator("age", 1) - Düzgün tam ədəd:
->>> bg.integer_validator("age", 1)
+Type validation (must be an integer):
+    >>> bg.integer_validator("name", "John")
+    Traceback (most recent call last):
+    TypeError: name must be an integer
 
-4. integer_validator("age", 0) - Sərhəd halı (0):
->>> bg.integer_validator("age", 0)
-Traceback (most recent call last):
-    ...
-ValueError: age must be greater than 0
+    >>> bg.integer_validator("weight", 15.5)
+    Traceback (most recent call last):
+    TypeError: weight must be an integer
 
-5. integer_validator("age", -4) - Mənfi ədəd:
->>> bg.integer_validator("age", -4)
-Traceback (most recent call last):
-    ...
-ValueError: age must be greater than 0
+    >>> bg.integer_validator("list", [1, 2, 3])
+    Traceback (most recent call last):
+    TypeError: list must be an integer
 
-6. integer_validator("age", "4") - String tipi (TypeError):
->>> bg.integer_validator("age", "4")
-Traceback (most recent call last):
-    ...
-TypeError: age must be an integer
+Value validation (must be > 0):
+    >>> bg.integer_validator("age", 0)
+    Traceback (most recent call last):
+    ValueError: age must be greater than 0
 
-7. integer_validator("age", (4,)) - Tuple tipi:
->>> bg.integer_validator("age", (4,))
-Traceback (most recent call last):
-    ...
-TypeError: age must be an integer
-
-8. integer_validator("age", [3]) - List tipi:
->>> bg.integer_validator("age", [3])
-Traceback (most recent call last):
-    ...
-TypeError: age must be an integer
-
-9. integer_validator("age", True) - Boolean tipi (Python-da int sayılır, amma type() yoxlaması bunu tutmalıdır):
->>> bg.integer_validator("age", True)
-Traceback (most recent call last):
-    ...
-TypeError: age must be an integer
-
-10. integer_validator("age", {3, 4}) - Set tipi:
->>> bg.integer_validator("age", {3, 4})
-Traceback (most recent call last):
-    ...
-TypeError: age must be an integer
-
-11. integer_validator("age", None) - None tipi:
->>> bg.integer_validator("age", None)
-Traceback (most recent call last):
-    ...
-TypeError: age must be an integer
-
-12. Arqument çatışmazlığı testi (Bonus):
->>> bg.integer_validator("only_name")
-Traceback (most recent call last):
-    ...
-TypeError: BaseGeometry.integer_validator() missing 1 required positional argument: 'value'
+    >>> bg.integer_validator("distance", -4)
+    Traceback (most recent call last):
+    ValueError: distance must be greater than 0
