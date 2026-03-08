@@ -5,10 +5,10 @@
 def pascal_triangle(n):
     """
     n olculu Paskal ucbucagini siyahilar siyahisi kimi qaytarir.
-    
+
     Args:
         n (int): Ucducagin setir sayi.
-        
+
     Returns:
         list: Tam ededlerden ibaret siyahilar siyahisi.
     """
