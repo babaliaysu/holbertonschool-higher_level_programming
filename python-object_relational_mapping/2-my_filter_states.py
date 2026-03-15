@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
 Displays all values in the states table where name matches the argument.
-Uses format() as strictly required by the checker.
 """
 import MySQLdb
 import sys
@@ -19,11 +18,8 @@ if __name__ == "__main__":
     # Create cursor
     cur = db.cursor()
 
-    # The checker strictly requires format(). 
-    # To handle case sensitivity as requested in these types of tasks,
-    # we use BINARY in the SQL query.
-    query = "SELECT * FROM states WHERE name = BINARY '{}' ORDER BY id ASC".format(sys.argv[4])
-    
+    # Execute query with format() - exactly as required
+    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(sys.argv[4])
     cur.execute(query)
 
     # Fetch and print all matching rows
