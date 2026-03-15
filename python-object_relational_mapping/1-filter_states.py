@@ -24,14 +24,13 @@ if __name__ == "__main__":
     # Cursor yaradırıq
     cursor = db.cursor()
 
-    # Məlumatları süzgəcdən keçiririk
-    # BINARY açar sözü 'N' hərfini böyük-kiçik hərfə həssas (case-sensitive) edir
-    cursor.execute("SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY id ASC")
+    # Parametrləşdirilmiş sorğu istifadə edirik (SQL Injection qarşısını alır)
+    # MySQLdb-də %s yerinə qoyulan dəyərlər avtomatik kotirovka olunur
+    query = "SELECT * FROM states WHERE name LIKE BINARY %s ORDER BY id ASC"
+    cursor.execute(query, ('N%',))
 
-    # Nəticələri alırıq
+    # Nəticələri alırıq və çap edirik
     rows = cursor.fetchall()
-
-    # Nəticələri çap edirik
     for row in rows:
         print(row)
 
