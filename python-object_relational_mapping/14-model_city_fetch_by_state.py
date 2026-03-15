@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Script to list all cities from the database
-"""
+""" Lists all City objects from the database hbtn_0e_14_usa """
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -9,27 +7,18 @@ from model_state import Base, State
 from model_city import City
 
 if __name__ == "__main__":
-    # Giriş arqumentlərini al
-    username = sys.argv[1]
-    password = sys.argv[2]
-    db_name = sys.argv[3]
-
-    # Mühərriki yarat
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.
-                           format(username, password, db_name),
-                           pool_pre_ping=True)
-
-    # Sessiya yarat
+    # Verilənlər bazasına qoşulma
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
+        sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
+    
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Məlumatları al (City və State-i join edərək)
-    # Sıralama cities.id üzrə aparılır
-    results = session.query(City, State).join(State).order_by(City.id).all()
+    # City və State obyektlərini join edərək çəkirik
+    cities = session.query(City, State).join(State).order_by(City.id).all()
 
-    # Nəticələri çap et
-    for city, state in results:
+    # Nəticələri tələb olunan formatda çap edirik
+    for city, state in cities:
         print("{}: ({}) {}".format(state.name, city.id, city.name))
 
-    # Sessiyanı bağla
     session.close()
