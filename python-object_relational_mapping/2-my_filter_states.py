@@ -1,32 +1,45 @@
 #!/usr/bin/python3
-""" Script that takes an argument and displays all values in the states
-    table of hbtn_0e_0_usa where name matches the argument securely. """
+"""
+Displays all values in the states table where name matches the argument
+(using MySQLdb, format() method, but with proper safety in mind)
+"""
+
 import MySQLdb
 import sys
 
 if __name__ == "__main__":
-    # Connect to the MySQL server
+    # 4 arguments: username, password, database, state_name
+    if len(sys.argv) != 5:
+        sys.exit("Usage: ./2-my_filter_states.py <user> <pass> <db> <state>")
+
+    mysql_username = sys.argv[1]
+    mysql_password = sys.argv[2]
+    database_name  = sys.argv[3]
+    search_state   = sys.argv[4]
+
+    # Connect to MySQL server
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3]
+        user=mysql_username,
+        passwd=mysql_password,
+        db=database_name
     )
 
-    # Create a cursor object
-    cursor = db.cursor()
+    # Create cursor
+    cur = db.cursor()
 
-    # Use parameterized query to prevent SQL Injection
-    # The %s is a placeholder for the database driver, not string formatting
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    cursor.execute(query, (sys.argv[4],))
+    # IMPORTANT: This is the vulnerable version they want you to write (using format)
+    # In real life we would NEVER do this → use parameters instead!
+    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(search_state)
 
-    # Fetch and display all rows
-    rows = cursor.fetchall()
+    cur.execute(query)
+
+    # Fetch and print all matching rows
+    rows = cur.fetchall()
     for row in rows:
         print(row)
 
     # Clean up
-    cursor.close()
+    cur.close()
     db.close()
