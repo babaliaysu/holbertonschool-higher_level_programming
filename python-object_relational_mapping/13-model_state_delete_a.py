@@ -9,22 +9,23 @@ from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
 if __name__ == "__main__":
-    # 1. Verilənlər bazasına qoşulma
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
+    # Verilənlər bazasına qoşulma
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
         sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
 
-    # 2. Sessiya yaradılması
+    # Sessiya yaradılması
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # 3. Adında 'a' hərfi olan obyektləri tapıb silirik
+    # Adında 'a' hərfi olan bütün ştatları tapırıq
     states_to_delete = session.query(State).filter(State.name.like('%a%')).all()
 
+    # Hər birini siliirik
     for state in states_to_delete:
         session.delete(state)
 
-    # 4. Dəyişikliyi bazaya tətbiq edirik
+    # Dəyişikliyi bazaya tətbiq edirik
     session.commit()
 
-    # 5. Sessiyanın bağlanması
+    # Sessiyanın bağlanması
     session.close()
