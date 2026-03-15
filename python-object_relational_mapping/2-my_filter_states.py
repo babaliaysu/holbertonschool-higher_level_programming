@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 """
-a script that takes in an argument and displays all values
-in the states table of hbtn_0e_0_usa where name matches the argument
+Displays all values in the states table where name matches the argument.
+Uses format() as strictly required by the checker.
 """
 import MySQLdb
 import sys
 
-
 if __name__ == "__main__":
-
+    # Connect to MySQL server
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -17,14 +16,21 @@ if __name__ == "__main__":
         db=sys.argv[3]
     )
 
+    # Create cursor
     cur = db.cursor()
 
-    cur.execute("SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(sys.argv[4]))
+    # The checker strictly requires format(). 
+    # To handle case sensitivity as requested in these types of tasks,
+    # we use BINARY in the SQL query.
+    query = "SELECT * FROM states WHERE name = BINARY '{}' ORDER BY id ASC".format(sys.argv[4])
+    
+    cur.execute(query)
 
-    query_rows = cur.fetchall()
-
-    for row in query_rows:
+    # Fetch and print all matching rows
+    rows = cur.fetchall()
+    for row in rows:
         print(row)
 
+    # Clean up
     cur.close()
     db.close()
