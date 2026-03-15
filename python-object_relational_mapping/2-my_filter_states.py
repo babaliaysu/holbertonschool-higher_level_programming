@@ -1,25 +1,31 @@
 #!/usr/bin/python3
-"""Filter states by user input with basic SQL injection protection"""
+"""
+Displays all values in the states table where name matches the argument.
+"""
 import MySQLdb
 import sys
 
+
 if __name__ == "__main__":
+    mysql_user = sys.argv[1]
+    mysql_password = sys.argv[2]
+    db_name = sys.argv[3]
+    state_searched = sys.argv[4]
+
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3]
+        user=mysql_user,
+        passwd=mysql_password,
+        db=db_name
     )
-    
-    cur = db.cursor()
-    
-    # Təhlükəsizlik üçün dırnaqları escape edirik
-    state_name = sys.argv[4].replace("'", "\\'").replace('"', '\\"')
-    cur.execute("SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(state_name))
-    
-    for row in cur.fetchall():
+    cursor = db.cursor()
+    # .format() metodundan istifadə edərək sorğunu qururuq
+    query = "SELECT * FROM states WHERE name LIKE BINARY '{}' \
+ORDER BY states.id ASC".format(state_searched)
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    for row in rows:
         print(row)
-    
-    cur.close()
+    cursor.close()
     db.close()
